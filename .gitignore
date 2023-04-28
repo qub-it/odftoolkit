@@ -200,3 +200,5 @@ buildNumber.properties
 # End of https://www.gitignore.io/api/java,maven,eclipse,intellij+all
 /xslt-runner/nbproject/private/
 /xslt-runner-task/nbproject/private/
+
+m2
