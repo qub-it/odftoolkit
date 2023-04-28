@@ -92,13 +92,7 @@
     </dependencyManagement>
 
     <modules>
-        <module>taglets</module>
-        <module>generator</module>
-        <module>xslt-runner</module>
-        <module>xslt-runner-task</module>
-        <module>odfdom</module>
-        <module>validator</module>
-        <module>simple</module>
+        <module>odfdom-repackage</module>
     </modules>
 
     <name>The ODF Toolkit</name>
@@ -268,6 +262,31 @@
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
+              <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-shade-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                            </transformers>
+                            <createDependencyReducedPom>true</createDependencyReducedPom>
+                            <relocations>
+                                <relocation>
+                                    <pattern>org.apache</pattern>
+                                    <shadedPattern>repackage.org.apache</shadedPattern>
+                                </relocation>
+                            </relocations>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>shade</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
         </plugins>
     </build>
     <profiles>
